@@ -28,7 +28,7 @@ public class RelationJedis {
         Jedis jedis = null;
         String eiffelId;
         try {
-            jedis = jedisPool.getResource();
+            jedis = getJedis();
             eiffelId = jedis.get(changeKey);
         } finally {
             assert jedis != null;
@@ -40,7 +40,7 @@ public class RelationJedis {
     public void insert(String changeKey, String eiffelId) {
         Jedis jedis = null;
         try {
-            jedis = jedisPool.getResource();
+            jedis = getJedis();
             jedis.append(changeKey, eiffelId);
             save(jedis);
         } finally {
@@ -52,7 +52,7 @@ public class RelationJedis {
     public void remove(String changeKey) {
         Jedis jedis = null;
         try {
-            jedis = jedisPool.getResource();
+            jedis = getJedis();
             jedis.del(changeKey);
             save(jedis);
         } finally {
@@ -65,13 +65,24 @@ public class RelationJedis {
         Jedis jedis = null;
         boolean exist;
         try {
-            jedis = jedisPool.getResource();
+            jedis = getJedis();
             exist = jedis.exists(changeKey);
         } finally {
             assert jedis != null;
             jedis.close();
         }
         return exist;
+    }
+
+    public void close() throws InterruptedException {
+        log.info("Saving before closing...");
+        Thread.sleep(1000);
+        getJedis().save();
+        jedisPool.close();
+    }
+
+    private Jedis getJedis() {
+        return jedisPool.getResource();
     }
 
     private void save(Jedis jedis) {
