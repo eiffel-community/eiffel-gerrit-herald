@@ -81,6 +81,23 @@ public class Service {
         } catch (IOException e) {
             log.error("Consumer failed: " + Arrays.toString(e.getStackTrace()));
         }
+
+        Runtime.getRuntime().addShutdownHook(new Thread(() -> {
+            try {
+                log.info("Closing receiver RabbitMQ connection to " + R_HOST.getValue() + "...");
+                receiver.close();
+                log.info("Closing sender RabbitMQ connection to " + S_HOST.getValue() + "...");
+                sender.close();
+                log.info("Done.");
+                log.info("Closing Redis connection...");
+                relationJedis.close();
+            } catch (IOException e) {
+                log.warn("Failed to close RabbitMQ: " + e.getMessage() + "\nCause: " + e.getCause());
+            } catch (InterruptedException e) {
+                log.warn("Failed to close Redis " + e.getMessage() + "\nCause: " + e.getCause());
+            }
+            log.info("Done. Closing service...");
+        }));
     }
 
     private static JsonObject generateEiffel(JsonObject gerritEvent)
