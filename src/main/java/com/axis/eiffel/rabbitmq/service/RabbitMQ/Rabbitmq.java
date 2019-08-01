@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2019, Axis Communications AB. All rights reserved.
  */
-package com.axis.eiffel.rabbitmq.service;
+package com.axis.eiffel.rabbitmq.service.RabbitMQ;
 
 import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.ConnectionFactory;
@@ -28,7 +28,7 @@ abstract class Rabbitmq implements AutoCloseable {
 
     public Connection createConnection()
             throws NoSuchAlgorithmException, KeyManagementException, TimeoutException, IOException {
-        //factory.useSslProtocol();
+        factory.useSslProtocol();
         return factory.newConnection();
     }
 

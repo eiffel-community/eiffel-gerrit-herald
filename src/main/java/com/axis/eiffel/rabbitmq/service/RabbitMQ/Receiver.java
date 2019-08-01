@@ -1,7 +1,7 @@
 /*
  * Copyright (c) 2019, Axis Communications AB. All rights reserved.
  */
-package com.axis.eiffel.rabbitmq.service;
+package com.axis.eiffel.rabbitmq.service.RabbitMQ;
 
 import com.rabbitmq.client.CancelCallback;
 import com.rabbitmq.client.Channel;
