@@ -4,6 +4,9 @@
 
 package com.axis.eiffel.rabbitmq.service;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.io.IOException;
 import java.util.Objects;
 import java.util.Properties;
@@ -26,10 +29,12 @@ public enum ServiceProperties {
     S_USERNAME,
     S_PASSWORD,
     S_HOST,
-    S_VIRTUALHOST;
+    S_VIRTUALHOST,
+    DATABASE_URL,
+    DATABASE_PORT;
 
     private final Properties properties;
-
+    private final Logger log = LoggerFactory.getLogger(Service.class);
     private Object value;
 
     ServiceProperties() {
@@ -38,10 +43,10 @@ public enum ServiceProperties {
             properties.load(getClass().getClassLoader().getResourceAsStream("config.properties"));
             value = Objects.requireNonNull(properties.get(this.toString()));
         } catch (IOException e) {
-            System.out.println("Unable to load config file.");
+            log.error("Unable to load config file. " + e.getMessage() + "\nCause: " + e.getCause());
             System.exit(1);
         } catch (NullPointerException e) {
-            System.out.println("All values in the config file must be set.");
+            log.warn("All values in the config file must be set. " + e.getMessage() + "\nCause: " + e.getCause());
             System.exit(1);
         }
     }
