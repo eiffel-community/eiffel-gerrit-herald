@@ -28,7 +28,7 @@ abstract class Rabbitmq implements AutoCloseable {
 
     public Connection createConnection()
             throws NoSuchAlgorithmException, KeyManagementException, TimeoutException, IOException {
-        factory.useSslProtocol();
+        //factory.useSslProtocol();
         return factory.newConnection();
     }
 

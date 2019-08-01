@@ -7,6 +7,7 @@ import com.rabbitmq.client.CancelCallback;
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.DeliverCallback;
+import com.rabbitmq.client.Delivery;
 
 import java.io.IOException;
 import java.security.KeyManagementException;
@@ -51,6 +52,7 @@ public class Receiver extends Rabbitmq {
     private void queueDeclare(String queueName) throws IOException {
         this.queueName = queueName;
         channel.queueDeclare(this.queueName, true, false, false, null);
+        channel.basicQos(1);
     }
 
     private void queueBind(String exchangeName, String routingKey) throws IOException {
@@ -61,6 +63,10 @@ public class Receiver extends Rabbitmq {
                         CancelCallback cancelCallback)
             throws IOException {
         channel.basicConsume(this.queueName, autoAck, deliverCallback, cancelCallback);
+    }
+
+    public void ack(Delivery delivery) throws IOException {
+        channel.basicAck(delivery.getEnvelope().getDeliveryTag(), false);
     }
 
     @Override
