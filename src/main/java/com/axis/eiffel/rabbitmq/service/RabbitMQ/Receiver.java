@@ -37,11 +37,27 @@ public class Receiver extends Rabbitmq {
         return connection.createChannel();
     }
 
+    /**
+     * Sets the queue to the channel.
+     *
+     * @param queueName Name of the queue
+     * @param exchangeName Name of the exchange
+     * @param routingKey Routing key
+     * @throws IOException
+     */
     public void setQueue(String queueName, String exchangeName, String routingKey) throws IOException {
         queueDeclare(queueName);
         queueBind(exchangeName, routingKey);
     }
 
+    /**
+     * Sets the queue to the channel with multiple routing keys.
+     *
+     * @param queueName Name of the queue
+     * @param exchangeName Name of the exchange
+     * @param routingKeys Routing keys
+     * @throws IOException
+     */
     public void setQueue(String queueName, String exchangeName, List<String> routingKeys) throws IOException {
         queueDeclare(queueName);
         for (String routingKey : routingKeys) {
@@ -59,12 +75,26 @@ public class Receiver extends Rabbitmq {
         channel.queueBind(this.queueName, exchangeName, routingKey);
     }
 
+    /**
+     * Starts consuming from a channel.
+     *
+     * @param autoAck true if channel should automatic send ack
+     * @param deliverCallback How to handle the delivery
+     * @param cancelCallback What to do if consumer cancel
+     * @throws IOException
+     */
     public void consume(boolean autoAck, DeliverCallback deliverCallback,
                         CancelCallback cancelCallback)
             throws IOException {
         channel.basicConsume(this.queueName, autoAck, deliverCallback, cancelCallback);
     }
 
+    /**
+     * Ack a delivery
+     *
+     * @param delivery delivery to send ack on
+     * @throws IOException
+     */
     public void ack(Delivery delivery) throws IOException {
         channel.basicAck(delivery.getEnvelope().getDeliveryTag(), false);
     }

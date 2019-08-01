@@ -20,10 +20,22 @@ public class RelationJedis {
 
     private JedisPool jedisPool;
 
+    /**
+     * Redis connection with relations as insert.
+     *
+     * @param url Redis server address
+     * @param port Redis server port
+     */
     public RelationJedis(String url, int port) {
         jedisPool = new JedisPool(new JedisPoolConfig(), url, port);
     }
 
+    /**
+     * Gets EiffelId by changeKey.
+     *
+     * @param changeKey Gerrit changeKey
+     * @return String: EiffelId
+     */
     public String getEiffelId(String changeKey) {
         Jedis jedis = null;
         String eiffelId;
@@ -37,6 +49,12 @@ public class RelationJedis {
         return eiffelId;
     }
 
+    /**
+     * Insert the relation between a Gerrit changeKey and eiffelId.
+     *
+     * @param changeKey Gerrit change
+     * @param eiffelId eiffelId
+     */
     public void insert(String changeKey, String eiffelId) {
         Jedis jedis = null;
         try {
@@ -49,6 +67,11 @@ public class RelationJedis {
         }
     }
 
+    /**
+     * Removes the relation from changeKey.
+     *
+     * @param changeKey Gerrit changeKey
+     */
     public void remove(String changeKey) {
         Jedis jedis = null;
         try {
@@ -61,6 +84,12 @@ public class RelationJedis {
         }
     }
 
+    /**
+     * Check if storage contains a relation from changeKey.
+     *
+     * @param changeKey Gerrit changeKey
+     * @return boolean: true if exist false otherwise
+     */
     public boolean contains(String changeKey) {
         Jedis jedis = null;
         boolean exist;
@@ -74,6 +103,11 @@ public class RelationJedis {
         return exist;
     }
 
+    /**
+     * Saves one last time and closes connection.
+     *
+     * @throws InterruptedException If close fails
+     */
     public void close() throws InterruptedException {
         log.info("Saving before closing...");
         Thread.sleep(1000);

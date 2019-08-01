@@ -35,11 +35,25 @@ public class Sender extends Rabbitmq {
         return connection.createChannel();
     }
 
+    /**
+     * Set the exchange on the channel
+     *
+     * @param exchangeName Name of the exchange
+     * @param type Exchange type
+     * @throws IOException
+     */
     public void setExchange(String exchangeName, String type) throws IOException {
         this.exchangeName = exchangeName;
         channel.exchangeDeclare(this.exchangeName, type, true);
     }
 
+    /**
+     * Sends the message on the channel.
+     *
+     * @param routingKey Routing key
+     * @param message Message
+     * @throws IOException
+     */
     public void send(String routingKey, String message) throws IOException {
         channel.basicPublish(this.exchangeName, routingKey, null, message.getBytes(UTF_8));
     }

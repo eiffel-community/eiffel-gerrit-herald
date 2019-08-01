@@ -19,6 +19,14 @@ abstract class Rabbitmq implements AutoCloseable {
 
     private ConnectionFactory factory = new ConnectionFactory();
 
+    /**
+     * RabbitMQ connection.
+     *
+     * @param username RabbitMQ username
+     * @param password RabbitMQ password
+     * @param host RabbitMQ host address
+     * @param virtualHost RabbitMQ virtual host
+     */
     public Rabbitmq(String username, String password, String host, String virtualHost) {
         factory.setUsername(username);
         factory.setPassword(password);
@@ -26,11 +34,25 @@ abstract class Rabbitmq implements AutoCloseable {
         factory.setVirtualHost(virtualHost);
     }
 
+    /**
+     * Creates a connection to a RabbitMQ server.
+     *
+     * @return Connection: connection
+     * @throws NoSuchAlgorithmException
+     * @throws KeyManagementException
+     * @throws TimeoutException
+     * @throws IOException
+     */
     public Connection createConnection()
             throws NoSuchAlgorithmException, KeyManagementException, TimeoutException, IOException {
         factory.useSslProtocol();
         return factory.newConnection();
     }
 
+    /**
+     * Close the connection.
+     *
+     * @throws IOException
+     */
     public abstract void close() throws IOException;
 }

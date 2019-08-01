@@ -51,6 +51,11 @@ public enum ServiceProperties {
         }
     }
 
+    /**
+     * Get value of property
+     *
+     * @return String: Property value
+     */
     public String getValue() {
         return (String) value;
     }
