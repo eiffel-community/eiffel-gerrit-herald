@@ -9,6 +9,9 @@ This service is part of the [Eiffel Community](https://eiffel-community.github.i
 Read more about the Eiffel protocol on https://github.com/eiffel-community/eiffel.
 
 ## Usage
+
+*OBS: Requires a running Redis server. [See more](https://redis.io/)* 
+
 #### Config
 Set config in `src/main/resources/config.properties` 
 #### Build
