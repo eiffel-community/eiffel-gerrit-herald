@@ -8,16 +8,18 @@ This service is part of the [Eiffel Community](https://eiffel-community.github.i
 
 Read more about the Eiffel protocol on https://github.com/eiffel-community/eiffel.
 
-## Usage
+## Usage 
 
-*OBS: Requires a running Redis server. [See more](https://redis.io/)* 
+#### Prepare
+Download and cd repo `git clone https://github.com/chrillebile/gerrit-rabbitmq-eiffel-service.git && cd gerrit-rabbitmq-eiffel-service`
 
-#### Config
 Set config in `src/main/resources/config.properties` 
+
 #### Build
-`./gradlew clean jar`
+docker-compose build
+
 #### Run
-`java -jar build/libs/eiffel-rabbitmq-service-1.0.0.jar`
+docker-compose up -d
 
 ## Maintainers
  * Christian Bilevits
