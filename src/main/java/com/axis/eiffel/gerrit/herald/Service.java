@@ -13,13 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.axis.eiffel.rabbitmq.service;
+package com.axis.eiffel.gerrit.herald;
 
-import com.axis.eiffel.rabbitmq.service.Jedis.RelationJedis;
-import com.axis.eiffel.rabbitmq.service.RabbitMQ.Receiver;
-import com.axis.eiffel.rabbitmq.service.RabbitMQ.Sender;
-import com.axis.gerrit.lib.eiffel.formatter.EiffelEventService;
-import com.axis.gerrit.lib.eiffel.formatter.EventException;
+import com.axis.eiffel.gerrit.herald.Jedis.RelationJedis;
+import com.axis.eiffel.gerrit.herald.RabbitMQ.Receiver;
+import com.axis.eiffel.gerrit.herald.RabbitMQ.Sender;
+import com.axis.eiffel.gerrit.lib.formatter.EiffelEventService;
+import com.axis.eiffel.gerrit.lib.formatter.EventException;
 import com.ericsson.eiffel.remrem.semantics.validator.EiffelValidationException;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
@@ -34,21 +34,21 @@ import java.security.NoSuchAlgorithmException;
 import java.util.Arrays;
 import java.util.concurrent.TimeoutException;
 
-import static com.axis.eiffel.rabbitmq.service.ServiceProperties.DATABASE_PORT;
-import static com.axis.eiffel.rabbitmq.service.ServiceProperties.DATABASE_URL;
-import static com.axis.eiffel.rabbitmq.service.ServiceProperties.R_EXCHANGE_NAME;
-import static com.axis.eiffel.rabbitmq.service.ServiceProperties.R_HOST;
-import static com.axis.eiffel.rabbitmq.service.ServiceProperties.R_PASSWORD;
-import static com.axis.eiffel.rabbitmq.service.ServiceProperties.R_QUEUE_NAME;
-import static com.axis.eiffel.rabbitmq.service.ServiceProperties.R_ROUTING_KEY;
-import static com.axis.eiffel.rabbitmq.service.ServiceProperties.R_USERNAME;
-import static com.axis.eiffel.rabbitmq.service.ServiceProperties.R_VIRTUALHOST;
-import static com.axis.eiffel.rabbitmq.service.ServiceProperties.S_EXCHANGE_NAME;
-import static com.axis.eiffel.rabbitmq.service.ServiceProperties.S_EXCHANGE_TYPE;
-import static com.axis.eiffel.rabbitmq.service.ServiceProperties.S_HOST;
-import static com.axis.eiffel.rabbitmq.service.ServiceProperties.S_PASSWORD;
-import static com.axis.eiffel.rabbitmq.service.ServiceProperties.S_USERNAME;
-import static com.axis.eiffel.rabbitmq.service.ServiceProperties.S_VIRTUALHOST;
+import static com.axis.eiffel.gerrit.herald.ServiceProperties.DATABASE_PORT;
+import static com.axis.eiffel.gerrit.herald.ServiceProperties.DATABASE_URL;
+import static com.axis.eiffel.gerrit.herald.ServiceProperties.R_EXCHANGE_NAME;
+import static com.axis.eiffel.gerrit.herald.ServiceProperties.R_HOST;
+import static com.axis.eiffel.gerrit.herald.ServiceProperties.R_PASSWORD;
+import static com.axis.eiffel.gerrit.herald.ServiceProperties.R_QUEUE_NAME;
+import static com.axis.eiffel.gerrit.herald.ServiceProperties.R_ROUTING_KEY;
+import static com.axis.eiffel.gerrit.herald.ServiceProperties.R_USERNAME;
+import static com.axis.eiffel.gerrit.herald.ServiceProperties.R_VIRTUALHOST;
+import static com.axis.eiffel.gerrit.herald.ServiceProperties.S_EXCHANGE_NAME;
+import static com.axis.eiffel.gerrit.herald.ServiceProperties.S_EXCHANGE_TYPE;
+import static com.axis.eiffel.gerrit.herald.ServiceProperties.S_HOST;
+import static com.axis.eiffel.gerrit.herald.ServiceProperties.S_PASSWORD;
+import static com.axis.eiffel.gerrit.herald.ServiceProperties.S_USERNAME;
+import static com.axis.eiffel.gerrit.herald.ServiceProperties.S_VIRTUALHOST;
 import static java.nio.charset.StandardCharsets.UTF_8;
 
 /**

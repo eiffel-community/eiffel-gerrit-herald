@@ -1,7 +1,7 @@
 FROM openjdk:12
 
 # Setting eiffel build name
-ARG EIFFEL=eiffel-rabbitmq-service-1.0.0.jar
+ARG EIFFEL=eiffel-gerrit-herald-1.0.0.jar
 
 RUN mkdir /app
 

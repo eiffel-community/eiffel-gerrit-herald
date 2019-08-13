@@ -13,9 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.axis.eiffel.rabbitmq.service.Jedis;
+package com.axis.eiffel.gerrit.herald.Jedis;
 
-import com.axis.eiffel.rabbitmq.service.Service;
+import com.axis.eiffel.gerrit.herald.Service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import redis.clients.jedis.Jedis;

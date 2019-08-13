@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.axis.eiffel.rabbitmq.service.RabbitMQ;
+package com.axis.eiffel.gerrit.herald.RabbitMQ;
 
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
