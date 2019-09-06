@@ -1,0 +1,16 @@
+version: '3.7'
+
+services:
+  redis:
+    image: redis:5.0.5
+    ports:
+      - "6380:6380"
+    volumes:
+      - ./:/app
+    entrypoint: redis-server
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    depends_on:
+      - redis
