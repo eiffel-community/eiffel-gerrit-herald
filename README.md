@@ -1,30 +1,46 @@
-# Gerrit-RabbitMQ-Eiffel-Service
+<!---
+   Copyright 2018 Ericsson AB.
+   For a full list of individual contributors, please see the commit history.
 
-*(PoC)* This service listens to a RabbitMQ queue containing Gerrit events, converts them to Eiffel events and sends them back to a RabbitMQ exchange.
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
 
-See supported events at https://github.com/chrillebile/gerrit-to-eiffel-event
+       http://www.apache.org/licenses/LICENSE-2.0
 
-This service is part of the [Eiffel Community](https://eiffel-community.github.io/).
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+--->
 
-Read more about the Eiffel protocol on https://github.com/eiffel-community/eiffel.
+<img src="./images/logo.png" alt="Eiffel Gerrit Herald" width="350"/>
 
-## Usage 
+# Eiffel Gerrit Herald
+*(PoC)* This service listens to a RabbitMQ queue containing Gerrit events, converts them to Eiffel events and send them to a RabbitMQ exchange.
 
-#### Prepare
-Download and cd repo `git clone https://github.com/chrillebile/gerrit-rabbitmq-eiffel-service.git && cd gerrit-rabbitmq-eiffel-service`
+See supported events at https://github.com/eiffel-community/eiffel-gerrit-lib
 
-Set config in `src/main/resources/config.properties` 
+# About this repository
+The contents of this repository are licensed under the [Apache License 2.0](./LICENSE).
 
-#### Build
-docker-compose build
+To get involved, please see [Code of Conduct](./CODE_OF_CONDUCT.md) and [contribution guidelines](./CONTRIBUTING.md).
 
-#### Run
-docker-compose up -d
+# About Eiffel
+This repository forms part of the Eiffel Community. Eiffel is a protocol for technology agnostic machine-to-machine communication in continuous integration and delivery pipelines, aimed at securing scalability, flexibility and traceability. Eiffel is based on the concept of decentralized real time messaging, both to drive the continuous integration and delivery system and to document it.
 
-## Maintainers
- * Christian Bilevits
-    - <christian.bilevits@axis.com>
+Visit [Eiffel Community](https://eiffel-community.github.io) to get started and get involved.
 
-## License
-[Apache-2.0](LICENSE)
+# Usage
 
+### Prepare
+Download and cd repo `git clone https://github.com/eiffel-community/eiffel-gerrit-herald.git && cd eiffel-gerrit-herald`
+
+Set config in `src/main/resources/config.properties`
+
+### Build
+`docker-compose build`
+
+### Run
+`docker-compose up -d`
