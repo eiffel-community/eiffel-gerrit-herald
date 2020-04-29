@@ -39,6 +39,7 @@ public enum ServiceProperties {
     R_VIRTUALHOST,
     S_EXCHANGE_NAME,
     S_EXCHANGE_TYPE,
+    S_EXCHANGE_ACTIVE,
     S_USERNAME,
     S_PASSWORD,
     S_HOST,

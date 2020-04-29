@@ -43,6 +43,7 @@ import static com.axis.eiffel.gerrit.herald.ServiceProperties.R_QUEUE_NAME;
 import static com.axis.eiffel.gerrit.herald.ServiceProperties.R_ROUTING_KEY;
 import static com.axis.eiffel.gerrit.herald.ServiceProperties.R_USERNAME;
 import static com.axis.eiffel.gerrit.herald.ServiceProperties.R_VIRTUALHOST;
+import static com.axis.eiffel.gerrit.herald.ServiceProperties.S_EXCHANGE_ACTIVE;
 import static com.axis.eiffel.gerrit.herald.ServiceProperties.S_EXCHANGE_NAME;
 import static com.axis.eiffel.gerrit.herald.ServiceProperties.S_EXCHANGE_TYPE;
 import static com.axis.eiffel.gerrit.herald.ServiceProperties.S_HOST;
@@ -133,7 +134,8 @@ public class Service {
                     S_VIRTUALHOST.getValue());
             receiver = new Receiver(R_USERNAME.getValue(), R_PASSWORD.getValue(), R_HOST.getValue(),
                     R_VIRTUALHOST.getValue());
-            sender.setExchange(S_EXCHANGE_NAME.getValue(), S_EXCHANGE_TYPE.getValue());
+            sender.setExchange(S_EXCHANGE_NAME.getValue(), S_EXCHANGE_TYPE.getValue(),
+                    Boolean.parseBoolean(S_EXCHANGE_ACTIVE.getValue()));
             receiver.setQueue(R_QUEUE_NAME.getValue(), R_EXCHANGE_NAME.getValue(), R_ROUTING_KEY.getValue());
         } catch (IOException | TimeoutException | NoSuchAlgorithmException | KeyManagementException e) {
             log.error("Could not start connection to RabbitMQ: " + e.getMessage() + "\nCause: " + e.getCause());
