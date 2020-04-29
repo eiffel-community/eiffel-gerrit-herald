@@ -18,7 +18,9 @@ package com.axis.eiffel.gerrit.herald;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.Objects;
 import java.util.Properties;
 
@@ -51,7 +53,14 @@ public enum ServiceProperties {
     ServiceProperties() {
         properties = new Properties();
         try {
-            properties.load(getClass().getClassLoader().getResourceAsStream("config.properties"));
+            InputStream propertyStream;
+            String customPropertyFileLocation = System.getProperty("herald.properties");
+            if (customPropertyFileLocation != null) {
+                propertyStream = new FileInputStream(customPropertyFileLocation);
+            } else {
+                propertyStream = getClass().getClassLoader().getResourceAsStream("config.properties");
+            }
+            properties.load(propertyStream);
             value = Objects.requireNonNull(properties.get(this.toString()));
         } catch (IOException e) {
             log.error("Unable to load config file. " + e.getMessage() + "\nCause: " + e.getCause());

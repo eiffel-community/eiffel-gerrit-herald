@@ -37,7 +37,11 @@ Visit [Eiffel Community](https://eiffel-community.github.io) to get started and 
 ### Prepare
 Download and cd repo `git clone https://github.com/eiffel-community/eiffel-gerrit-herald.git && cd eiffel-gerrit-herald`
 
-Set config in `src/main/resources/config.properties`
+Set config in `src/main/resources/config.properties`. If you don't
+want to store your configuration in the jar file that's produced by
+the build, the `herald.properties` system property can be set to
+contain the path to the property file to load instead of the one
+built into the executable.
 
 ### Build
 `docker-compose build`
