@@ -39,6 +39,15 @@ Download and cd repo `git clone https://github.com/eiffel-community/eiffel-gerri
 
 Set config in `src/main/resources/config.properties`
 
+Additionally, if you run Gerrit Herald via Docker, the following
+environment variables can be set to affect the program's runtime
+behavior:
+
+| Variable      | Meaning
+| ------------- | --------
+| HERALD_OPTS   | Options to pass to Eiffel Gerrit Herald itself. |
+| JAVA_OPTS     | Options to pass to the JVM (e.g. "-Xmx1g -Dproperty=value"). |
+
 ### Build
 `docker-compose build`
 
