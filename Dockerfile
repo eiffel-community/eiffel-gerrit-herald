@@ -1,19 +1,17 @@
-FROM openjdk:12
+FROM openjdk:12 AS build
 
-# Setting eiffel build name
-ARG EIFFEL=eiffel-gerrit-herald-1.0.0.jar
-
-RUN mkdir /app
-
-# Building project
 COPY . /temp
-WORKDIR temp/
+WORKDIR temp
 RUN ./gradlew clean jar
 
-# Moving build to app folder
-RUN mv build/libs/$EIFFEL /app/$EIFFEL
-WORKDIR /app/
+FROM openjdk:12
 
-# Setting startup command
-ENV EIFFEL_ENV $EIFFEL
-CMD java -jar $EIFFEL_ENV
+# Use the shell form of ENTRYPOINT to allow environment variable expansion.
+# exec is used to make sure that the JVM gets pid 1 so that it receives
+# SIGTERM et al and gets an opportunity to shut down cleanly.
+ENTRYPOINT exec java ${JAVA_OPTS:-} -jar /app/eiffel-gerrit-herald.jar ${HERALD_OPTS:-}
+
+RUN mkdir /app
+WORKDIR /app
+
+COPY --from=build /temp/build/libs/eiffel-gerrit-herald-*.jar /app/eiffel-gerrit-herald.jar
