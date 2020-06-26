@@ -52,11 +52,16 @@ public class Sender extends Rabbitmq {
      *
      * @param exchangeName Name of the exchange
      * @param type Exchange type
+     * @param activeDeclare Whether the exchange should be actively declared
      * @throws IOException
      */
-    public void setExchange(String exchangeName, String type) throws IOException {
+    public void setExchange(String exchangeName, String type, boolean activeDeclare) throws IOException {
         this.exchangeName = exchangeName;
-        channel.exchangeDeclare(this.exchangeName, type, true);
+        if (activeDeclare) {
+            channel.exchangeDeclare(this.exchangeName, type, true);
+        } else {
+            channel.exchangeDeclarePassive(this.exchangeName);
+        }
     }
 
     /**
