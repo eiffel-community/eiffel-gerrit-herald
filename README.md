@@ -17,9 +17,9 @@
 
 <img src="./images/logo.png" alt="Eiffel Gerrit Herald" width="350"/>
 
-# Eiffel Gerrit Herald
-
 [![Sandbox badge](https://img.shields.io/badge/Stage-Sandbox-yellow)](https://github.com/eiffel-community/community/blob/master/PROJECT_LIFECYCLE.md#stage-sandbox)
+
+# Eiffel Gerrit Herald
 
 *(PoC)* This service listens to a RabbitMQ queue containing Gerrit events, converts them to Eiffel events and send them to a RabbitMQ exchange.
 
